@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5431/kpi
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+jwt:
+  secret: SomeVerySecretJwtSecretKey
+  access-token-ttl-ms: 300000
+  refresh-token-ttl-ms: 2592000000

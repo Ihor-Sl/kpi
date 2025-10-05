@@ -1,0 +1,35 @@
+version: '3.9'
+name: kpi
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: kpi
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - kpi-network
+
+  app:
+    image: docker.io/library/kpi:0.0.1-SNAPSHOT
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/kpi
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    networks:
+      - kpi-network
+    profiles:
+      - spring-app
+
+volumes:
+  postgres-data: { }
+
+networks:
+  kpi-network: { }
