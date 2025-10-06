@@ -55,7 +55,7 @@ public class JwtService {
                 .claim(JWT_USER_ID_CLAIM, user.getId())
                 .claim(JWT_ROLES_CLAIM, user.getRoles())
                 .issuedAt(new Date(now.toEpochMilli()))
-                .expiration(new Date(now.plusSeconds(ttl).toEpochMilli()))
+                .expiration(new Date(now.plusMillis(ttl).toEpochMilli()))
                 .signWith(JWT_SECRET_KEY)
                 .compact();
     }
