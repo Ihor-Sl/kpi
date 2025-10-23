@@ -63,6 +63,7 @@ public class JwtService {
     public Optional<UserAuthentication> toAuthentication(String accessToken) {
         try {
             Claims claims = Jwts.parser()
+                    .clock(() -> new Date(clock.instant().toEpochMilli()))
                     .verifyWith(JWT_SECRET_KEY)
                     .build()
                     .parseSignedClaims(accessToken)
